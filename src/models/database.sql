@@ -1,0 +1,5 @@
+CREATE DATABASE malaysian_profiles;
+
+CREATE TABLE users (id SERIAL PRIMARY KEY, email VARCHAR(128));
+
+CREATE TABLE profiles (id SERIAL PRIMARY KEY, name VARCHAR(256));

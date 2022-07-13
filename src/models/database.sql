@@ -9,6 +9,13 @@ CREATE TABLE users (
 
 CREATE TABLE profiles (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(256) NOT NULL,
+  user_id integer NOT NULL REFERENCES users (id),
+  first_name VARCHAR(255) NOT NULL,
+  last_name VARCHAR(255),
+  email VARCHAR(254) NOT NULL,
+  birthdate date NOT NULL,
+  gender VARCHAR(10) NOT NULL,
+  is_deletable BOOLEAN NOT NULL,
   created_at timestamp with time zone default CURRENT_TIMESTAMP NOT NULL,
+  updated_at timestamp with time zone
 );

@@ -9,6 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const usersRoute = require('./src/routes/users');
+const profilesRoute = require('./src/routes/profiles');
 
 // Middlewares
 app.use(cors());
@@ -25,6 +26,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/users', usersRoute);
+app.use('/api/profiles', profilesRoute);
 
 // Handle undefined routes
 app.all('*', (req, res) =>

@@ -19,3 +19,16 @@ CREATE TABLE profiles (
   created_at timestamp with time zone default CURRENT_TIMESTAMP NOT NULL,
   updated_at timestamp with time zone
 );
+
+CREATE TABLE addresses (
+  id SERIAL PRIMARY KEY,
+  profile_id integer NOT NULL REFERENCES profiles(id),
+  address1 VARCHAR(100) NOT NULL,
+  address2 VARCHAR(100),
+  city VARCHAR(50) NOT NULL,
+  state VARCHAR(50) NOT NULL,
+  zip VARCHAR(20) NOT NULL,
+  country VARCHAR(50) NOT NULL,
+  created_at timestamp with time zone default CURRENT_TIMESTAMP NOT NULL,
+  updated_at timestamp with time zone
+);

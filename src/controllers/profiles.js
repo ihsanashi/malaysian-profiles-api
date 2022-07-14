@@ -2,8 +2,11 @@ const pool = require('../models/index');
 
 const getAllProfiles = async (req, res) => {
   try {
-    const allProfiles = await pool.query('SELECT * FROM profiles');
-    res.json(allProfiles.rows);
+    const profilesWithAddresses = await pool.query(
+      'SELECT * FROM profiles LEFT JOIN addresses ON profiles.id = addresses.profile_id ORDER BY profiles.created_at'
+    );
+
+    res.status(200).json(profilesWithAddresses.rows);
   } catch (err) {
     console.error(err.message);
   }

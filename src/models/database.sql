@@ -22,7 +22,7 @@ CREATE TABLE profiles (
 
 CREATE TABLE addresses (
   id SERIAL PRIMARY KEY,
-  profile_id integer NOT NULL REFERENCES profiles(id),
+  profile_id integer NOT NULL REFERENCES profiles(id) DEFERRABLE INITIALLY DEFERRED,
   address1 VARCHAR(100) NOT NULL,
   address2 VARCHAR(100),
   city VARCHAR(50) NOT NULL,

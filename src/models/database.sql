@@ -15,7 +15,7 @@ CREATE TABLE profiles (
   email VARCHAR(254) NOT NULL,
   birthdate date NOT NULL,
   gender VARCHAR(10) NOT NULL,
-  is_deletable BOOLEAN NOT NULL,
+  is_deletable BOOLEAN NOT NULL DEFAULT FALSE,
   created_at timestamp with time zone default CURRENT_TIMESTAMP NOT NULL,
   updated_at timestamp with time zone
 );

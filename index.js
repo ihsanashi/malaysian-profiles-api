@@ -22,7 +22,7 @@ app.use(
 
 // Routes
 app.get('/', (req, res) => {
-  res.json({ msg: 'Oops, nothing to see here... Move along.' });
+  res.json({ message: 'Oops, nothing to see here... Move along.' });
 });
 
 app.use('/api/users', usersRoute);
@@ -31,7 +31,7 @@ app.use('/api/profiles', profilesRoute);
 // Handle undefined routes
 app.all('*', (req, res) =>
   res.json({
-    msg: 'This route does not exist.',
+    message: 'This route does not exist.',
   })
 );
 

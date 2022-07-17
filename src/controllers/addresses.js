@@ -9,9 +9,9 @@ const getAllAddresses = async (req, res) => {
     );
 
     if (addressesRecords.rows.length === 0) {
-      res
-        .status(404)
-        .json({ message: `No addresses found for profile with id ${profile_id}` });
+      res.status(404).json({
+        message: `No addresses found for profile with id ${profile_id}`,
+      });
     } else {
       res.status(200).json(addressesRecords.rows);
     }
@@ -29,7 +29,9 @@ const getAddress = async (req, res) => {
     );
 
     if (address.rows.length === 0) {
-      res.status(404).json({ message: `No address found for id ${address_id} associated to profile with id ${profile_id}` });
+      res.status(404).json({
+        message: `No address found for id ${address_id} associated to profile with id ${profile_id}`,
+      });
     } else {
       res.status(200).json(address.rows[0]);
     }

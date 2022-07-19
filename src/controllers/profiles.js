@@ -62,19 +62,12 @@ const getProfile = async (req, res) => {
 
 const createProfile = async (req, res) => {
   try {
-    const {
-      user_id,
-      first_name,
-      last_name,
-      email,
-      birthdate,
-      gender,
-      is_deletable,
-    } = req.body;
+    const { first_name, last_name, email, birthdate, gender, is_deletable } =
+      req.body;
 
     const profile = await pool.query(
-      'INSERT INTO profiles (user_id, first_name, last_name, email, birthdate, gender, is_deletable) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;',
-      [user_id, first_name, last_name, email, birthdate, gender, is_deletable]
+      'INSERT INTO profiles (first_name, last_name, email, birthdate, gender, is_deletable) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;',
+      [first_name, last_name, email, birthdate, gender, is_deletable]
     );
 
     res.status(201).json(profile.rows[0]);

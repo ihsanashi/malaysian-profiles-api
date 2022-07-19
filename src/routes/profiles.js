@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const profileValidation = require('../utils/validation/profiles');
+
 const {
   getAllProfiles,
   getProfile,
@@ -19,8 +21,8 @@ const {
 
 router.get('/', getAllProfiles);
 router.get('/:profile_id', getProfile);
-router.post('/', createProfile);
-router.put('/:profile_id', updateProfile);
+router.post('/', profileValidation, createProfile);
+router.put('/:profile_id', profileValidation, updateProfile);
 router.delete('/:profile_id', deleteProfile);
 
 router.get('/:profile_id/addresses', getAllAddresses);

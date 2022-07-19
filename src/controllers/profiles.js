@@ -1,4 +1,5 @@
 const pool = require('../models/index');
+const { body, validationResult } = require('express-validator');
 
 const getAllProfiles = async (req, res) => {
   try {
@@ -65,6 +66,12 @@ const createProfile = async (req, res) => {
     const { first_name, last_name, email, birthdate, gender, is_deletable } =
       req.body;
 
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const profile = await pool.query(
       'INSERT INTO profiles (first_name, last_name, email, birthdate, gender, is_deletable) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;',
       [first_name, last_name, email, birthdate, gender, is_deletable]
@@ -81,6 +88,12 @@ const updateProfile = async (req, res) => {
     const { profile_id } = req.params;
     const { first_name, last_name, email, birthdate, gender, is_deletable } =
       req.body;
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
     const updateProfile = await pool.query(
       'UPDATE profiles SET first_name = $2, last_name = $3, email = $4, birthdate = $5, gender = $6, is_deletable = $7, updated_at = CURRENT_TIMESTAMP WHERE id = $1 RETURNING *;',

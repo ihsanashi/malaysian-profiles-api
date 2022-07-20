@@ -1,4 +1,5 @@
 const pool = require('../models/index');
+const { validationResult } = require('express-validator');
 
 const getAllAddresses = async (req, res) => {
   try {
@@ -45,6 +46,12 @@ const createAddress = async (req, res) => {
     const { profile_id } = req.params;
     const { address1, address2, city, state, zip, country } = req.body;
 
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
     const address = await pool.query(
       'INSERT INTO addresses (profile_id, address1, address2, city, state, zip, country) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *;',
       [profile_id, address1, address2, city, state, zip, country]
@@ -60,6 +67,12 @@ const updateAddress = async (req, res) => {
   try {
     const { address_id } = req.params;
     const { address1, address2, city, state, zip, country } = req.body;
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
 
     const updateAddress = await pool.query(
       'UPDATE addresses SET address1 = $2, address2 = $3, city = $4, state = $5, zip = $6, country = $7, updated_at = CURRENT_TIMESTAMP WHERE id = $1 RETURNING *;',

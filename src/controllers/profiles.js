@@ -1,5 +1,5 @@
 const pool = require('../models/index');
-const { body, validationResult } = require('express-validator');
+const { validationResult } = require('express-validator');
 
 const getAllProfiles = async (req, res) => {
   try {

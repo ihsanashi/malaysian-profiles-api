@@ -16,12 +16,12 @@ CREATE TABLE profiles (
 CREATE TABLE addresses (
   id SERIAL PRIMARY KEY,
   profile_id integer NOT NULL REFERENCES profiles(id) DEFERRABLE INITIALLY DEFERRED,
-  address1 VARCHAR(100) NOT NULL,
-  address2 VARCHAR(100),
-  city VARCHAR(50) NOT NULL,
-  state VARCHAR(50) NOT NULL,
+  address1 VARCHAR(255) NOT NULL,
+  address2 VARCHAR(255),
+  city VARCHAR(100) NOT NULL,
+  state VARCHAR(100) NOT NULL,
   zip VARCHAR(20) NOT NULL,
-  country VARCHAR(50) NOT NULL,
+  country VARCHAR(100) NOT NULL,
   created_at timestamp with time zone default CURRENT_TIMESTAMP NOT NULL,
   updated_at timestamp with time zone
 );

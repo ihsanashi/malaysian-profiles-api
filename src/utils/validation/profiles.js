@@ -24,6 +24,11 @@ const profileValidation = [
     .isIn(['male', 'female'])
     .withMessage("Either 'male' or 'female' only"),
   body('is_deletable').isBoolean({ loose: true }),
+  body('nationality')
+    .trim()
+    .optional({ nullable: true, checkFalsy: true })
+    .isLength({ max: '255' })
+    .withMessage('nationality field cannot be more than 255 characters long'),
 ];
 
 module.exports = profileValidation;
